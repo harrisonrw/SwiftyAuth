@@ -23,6 +23,15 @@ struct ContentView: View {
                     .foregroundColor(Color(red: 254.0/255.0, green: 254.0/255.0, blue: 254.0/255.0))
                     .multilineTextAlignment(.center)
                     .padding()
+                
+                Button {
+                    print("Login")
+                } label: {
+                    Text("Sign In")
+                        .font(.system(size: 18.0, weight: .semibold))
+                        .foregroundColor(Color(red: 254.0/255.0, green: 254.0/255.0, blue: 254.0/255.0))
+                }
+
             }
             
         }
