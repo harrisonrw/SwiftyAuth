@@ -12,7 +12,7 @@ struct ContentView: View {
         
         ZStack {
             
-            Color(red: 240.0/255.0, green: 81.0/255.0, blue: 56.0/255.0)
+            Theme.Color.primaryBackground
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -20,7 +20,7 @@ struct ContentView: View {
                 
                 Text("Welcome to Swifty Auth!")
                     .font(.system(size: 24.0, weight: .medium))
-                    .foregroundColor(Color(red: 254.0/255.0, green: 254.0/255.0, blue: 254.0/255.0))
+                    .foregroundColor(Theme.Color.primaryText)
                     .multilineTextAlignment(.center)
                     .padding()
                 
@@ -29,7 +29,7 @@ struct ContentView: View {
                 } label: {
                     Text("Sign In")
                         .font(.system(size: 18.0, weight: .semibold))
-                        .foregroundColor(Color(red: 254.0/255.0, green: 254.0/255.0, blue: 254.0/255.0))
+                        .foregroundColor(Theme.Color.primaryText)
                 }
 
             }
