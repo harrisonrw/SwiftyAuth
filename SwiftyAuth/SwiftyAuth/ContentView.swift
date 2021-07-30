@@ -15,7 +15,16 @@ struct ContentView: View {
             Color(red: 240.0/255.0, green: 81.0/255.0, blue: 56.0/255.0)
                 .edgesIgnoringSafeArea(.all)
             
-            Image("swift-logo-white")
+            VStack {
+                Image("swift-logo-white")
+                
+                Text("Welcome to Swifty Auth!")
+                    .font(.system(size: 24.0, weight: .medium))
+                    .foregroundColor(Color(red: 254.0/255.0, green: 254.0/255.0, blue: 254.0/255.0))
+                    .multilineTextAlignment(.center)
+                    .padding()
+            }
+            
         }
         
     }
