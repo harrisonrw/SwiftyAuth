@@ -12,26 +12,31 @@ struct ContentView: View {
         
         ZStack {
             
-            Theme.Color.primaryBackground
+            Theme.Color.background
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Image("swift-logo-white")
+                Image("swift-logo-orange")
                 
                 Text("Welcome to Swifty Auth!")
                     .font(.system(size: 24.0, weight: .medium))
-                    .foregroundColor(Theme.Color.primaryText)
+                    .foregroundColor(Theme.Color.text)
                     .multilineTextAlignment(.center)
                     .padding()
                 
                 Button {
-                    print("Login")
+                    print("Sign In Pressed")
                 } label: {
                     Text("Sign In")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(Theme.Color.buttonText)
+                        .background(Theme.Color.buttonBackground)
+                        .cornerRadius(Theme.cornerRadius)
                         .font(.system(size: 18.0, weight: .semibold))
-                        .foregroundColor(Theme.Color.primaryText)
+                        .padding(.horizontal, 20.0)
                 }
-
+                
             }
             
         }
