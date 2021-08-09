@@ -11,8 +11,12 @@ struct AuthenticationView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var username = ""
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var email = ""
     @State private var password = ""
+    
+    @State private var isRegisterPresented = false
     
     var body: some View {
         
@@ -26,7 +30,31 @@ struct AuthenticationView: View {
                 Image("swift-logo-orange")
                     .padding()
                 
-                TextField("Username", text: $username)
+                if isRegisterPresented {
+                    
+                    TextField("First Name", text: $firstName)
+                        .frame(height: 54)
+                        .textFieldStyle(.plain)
+                        .textContentType(.givenName)
+                        .padding(.horizontal, 10)
+                        .cornerRadius(8)
+                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 4)
+                    
+                    TextField("Last Name", text: $lastName)
+                        .frame(height: 54)
+                        .textFieldStyle(.plain)
+                        .textContentType(.familyName)
+                        .padding(.horizontal, 10)
+                        .cornerRadius(8)
+                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 4)
+                    
+                }
+                
+                TextField("Email", text: $email)
                     .frame(height: 54)
                     .textFieldStyle(.plain)
                     .textContentType(.username)
@@ -49,10 +77,17 @@ struct AuthenticationView: View {
                 
                 Button {
                     
+                    if isRegisterPresented {
+                        // Register
+                    } else {
+                        // Sign In
+                    }
+                    
                     presentationMode.wrappedValue.dismiss()
                     
                 } label: {
-                    Text("Sign In")
+                    let actionButtonTitle = isRegisterPresented ? "Register" : "Sign In"
+                    Text(actionButtonTitle)
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(Theme.Color.buttonText)
@@ -63,16 +98,18 @@ struct AuthenticationView: View {
                         .padding(.vertical, 4)
                 }
                 
-                
-                Button("Reset Password") {
-                    print("Reset Password")
+                if !isRegisterPresented {
+                    Button("Reset Password") {
+                        print("Reset Password")
+                    }
+                    .foregroundColor(Theme.Color.buttonTextAlt)
+                    .padding(.top, 20)
                 }
-                .foregroundColor(Theme.Color.buttonTextAlt)
-                .padding(.top, 20)
                 
 
-                Button("Create a new account") {
-                    print("Register")
+                let modeButtonTitle = isRegisterPresented ? "Already have an account? Sign in" : "Create a new account"
+                Button(modeButtonTitle) {
+                    isRegisterPresented.toggle()
                 }
                 .foregroundColor(Theme.Color.buttonTextAlt)
                 .padding(.top, 20)
