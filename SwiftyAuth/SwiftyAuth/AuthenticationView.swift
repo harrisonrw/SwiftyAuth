@@ -21,6 +21,14 @@ struct AuthenticationView: View {
     @State private var isAlertPresented = false
     @State private var alertMessage = "An unknown error has occured!"
     
+    enum Field {
+        case firstName
+        case lastName
+        case email
+        case password
+    }
+    @FocusState private var focusedField: Field?
+    
     init() {
         // Transparent Navigation Bar
         UINavigationBar.appearance().barTintColor = .clear
@@ -56,6 +64,8 @@ struct AuthenticationView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 4)
+                                .focused($focusedField, equals: .firstName)
+                                .submitLabel(.next)
                             
                             TextField("Last Name", text: $lastName)
                                 .frame(height: 54)
@@ -66,6 +76,8 @@ struct AuthenticationView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 4)
+                                .focused($focusedField, equals: .lastName)
+                                .submitLabel(.next)
                             
                         }
                         
@@ -78,6 +90,8 @@ struct AuthenticationView: View {
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
                             .padding(.horizontal, 20)
                             .padding(.vertical, 4)
+                            .focused($focusedField, equals: .email)
+                            .submitLabel(.next)
                         
                         
                         SecureField("Password", text: $password)
@@ -89,25 +103,12 @@ struct AuthenticationView: View {
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
                             .padding(.horizontal, 20)
                             .padding(.vertical, 4)
+                            .focused($focusedField, equals: .password)
+                            .submitLabel(.done)
                         
                         Button {
                             
-                            guard isInputValid() else { return }
-                            
-                            Task {
-                                do {
-                                    
-                                    if isRegisterPresented {
-                                        let _ = try await UserManager.shared.register(firstName: firstName, lastName: lastName, email: email, password: password)
-                                    } else {
-                                        let _ = try await UserManager.shared.signIn(email: email, password: password)
-                                    }
-                                    presentationMode.wrappedValue.dismiss()
-                                    
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                            }
+                            signInRegisterPressed()
                             
                         } label: {
                             let actionButtonTitle = isRegisterPresented ? "Register" : "Sign In"
@@ -146,6 +147,19 @@ struct AuthenticationView: View {
                 .frame(maxWidth: .infinity)
                 
             }
+            .onSubmit {
+                switch focusedField {
+                case .firstName:
+                    focusedField = .lastName
+                case .lastName:
+                    focusedField = .email
+                case .email:
+                    focusedField = .password
+                default:
+                    focusedField = nil
+                    signInRegisterPressed()
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -163,6 +177,25 @@ struct AuthenticationView: View {
             
         }
         
+    }
+    
+    private func signInRegisterPressed() {
+        guard isInputValid() else { return }
+        
+        Task {
+            do {
+                
+                if isRegisterPresented {
+                    let _ = try await UserManager.shared.register(firstName: firstName, lastName: lastName, email: email, password: password)
+                } else {
+                    let _ = try await UserManager.shared.signIn(email: email, password: password)
+                }
+                presentationMode.wrappedValue.dismiss()
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func isInputValid() -> Bool {
