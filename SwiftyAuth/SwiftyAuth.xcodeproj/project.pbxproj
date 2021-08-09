@@ -14,6 +14,7 @@
 		E103819F25BF4F4C005C8610 /* SwiftyAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103819E25BF4F4C005C8610 /* SwiftyAuthTests.swift */; };
 		E10381AA25BF4F4C005C8610 /* SwiftyAuthUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10381A925BF4F4C005C8610 /* SwiftyAuthUITests.swift */; };
 		E12EBD0226B4AB1400C0A2D7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12EBD0126B4AB1400C0A2D7 /* Theme.swift */; };
+		E12EBD0426B4D3B300C0A2D7 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12EBD0326B4D3B300C0A2D7 /* AuthenticationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E10381A925BF4F4C005C8610 /* SwiftyAuthUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyAuthUITests.swift; sourceTree = "<group>"; };
 		E10381AB25BF4F4C005C8610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E12EBD0126B4AB1400C0A2D7 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		E12EBD0326B4D3B300C0A2D7 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				E103818C25BF4F4B005C8610 /* SwiftyAuthApp.swift */,
 				E103818E25BF4F4B005C8610 /* ContentView.swift */,
+				E12EBD0326B4D3B300C0A2D7 /* AuthenticationView.swift */,
 				E12EBD0126B4AB1400C0A2D7 /* Theme.swift */,
 				E103819025BF4F4C005C8610 /* Assets.xcassets */,
 				E103819525BF4F4C005C8610 /* Info.plist */,
@@ -264,6 +267,7 @@
 			files = (
 				E12EBD0226B4AB1400C0A2D7 /* Theme.swift in Sources */,
 				E103818F25BF4F4B005C8610 /* ContentView.swift in Sources */,
+				E12EBD0426B4D3B300C0A2D7 /* AuthenticationView.swift in Sources */,
 				E103818D25BF4F4B005C8610 /* SwiftyAuthApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +430,7 @@
 				DEVELOPMENT_TEAM = G69M4N2Z8V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftyAuth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,7 +452,7 @@
 				DEVELOPMENT_TEAM = G69M4N2Z8V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftyAuth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

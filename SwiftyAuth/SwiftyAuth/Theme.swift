@@ -16,6 +16,7 @@ enum Theme {
         static let text = SwiftUI.Color("Text")
         static let buttonBackground = SwiftUI.Color("ButtonBackground")
         static let buttonText = SwiftUI.Color("ButtonText")
+        static let buttonTextAlt = SwiftUI.Color("ButtonTextAlt")
     }
     
 }

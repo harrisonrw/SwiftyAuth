@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isAuthenticationViewPresented = false
+    
     var body: some View {
         
         ZStack {
@@ -25,7 +28,9 @@ struct ContentView: View {
                     .padding()
                 
                 Button {
-                    print("Sign In Pressed")
+                    
+                    isAuthenticationViewPresented.toggle()
+                    
                 } label: {
                     Text("Sign In")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -36,6 +41,7 @@ struct ContentView: View {
                         .font(.system(size: 18.0, weight: .semibold))
                         .padding(.horizontal, 20.0)
                 }
+                .fullScreenCover(isPresented: $isAuthenticationViewPresented, onDismiss: nil, content: AuthenticationView.init)
                 
             }
             
