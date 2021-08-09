@@ -1,2 +1,2 @@
 # SwiftyAuth
-Example of Authentication with Firebase and SwiftUI
+Example of a registration/login screen SwiftUI.
