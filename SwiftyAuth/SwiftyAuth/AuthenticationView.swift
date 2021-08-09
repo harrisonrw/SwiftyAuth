@@ -21,6 +21,14 @@ struct AuthenticationView: View {
     @State private var isAlertPresented = false
     @State private var alertMessage = "An unknown error has occured!"
     
+    init() {
+        // Transparent Navigation Bar
+        UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+    }
+    
     var body: some View {
         
         NavigationView {
