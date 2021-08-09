@@ -85,6 +85,8 @@ struct AuthenticationView: View {
                             .frame(height: 54)
                             .textFieldStyle(.plain)
                             .textContentType(.emailAddress)
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
                             .padding(.horizontal, 10)
                             .cornerRadius(8)
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
