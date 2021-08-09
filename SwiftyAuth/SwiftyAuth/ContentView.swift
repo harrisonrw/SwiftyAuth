@@ -11,6 +11,8 @@ struct ContentView: View {
     
     @State private var isAuthenticationViewPresented = false
     
+    @StateObject private var userManager = UserManager.shared
+    
     var body: some View {
         
         ZStack {
@@ -20,6 +22,7 @@ struct ContentView: View {
             
             VStack {
                 Image("swift-logo-orange")
+                    .padding()
                 
                 Text("Welcome to Swifty Auth!")
                     .font(.system(size: 24.0, weight: .medium))
@@ -27,12 +30,26 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 
+                if userManager.isSignedIn {
+                    Text("You are signed in!")
+                        .font(.system(size: 20.0, weight: .regular))
+                        .foregroundColor(Theme.Color.text)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
+                
                 Button {
                     
-                    isAuthenticationViewPresented.toggle()
+                    if userManager.isSignedIn {
+                        userManager.signOut()
+                    } else {
+                        isAuthenticationViewPresented.toggle()
+                    }
                     
                 } label: {
-                    Text("Sign In")
+                    
+                    let buttonTitle = userManager.isSignedIn ? "Sign Out" : "Sign In"
+                    Text(buttonTitle)
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(Theme.Color.buttonText)

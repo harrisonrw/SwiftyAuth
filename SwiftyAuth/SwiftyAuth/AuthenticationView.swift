@@ -18,6 +18,9 @@ struct AuthenticationView: View {
     
     @State private var isRegisterPresented = false
     
+    @State private var isAlertPresented = false
+    @State private var alertMessage = "An unknown error has occured!"
+    
     var body: some View {
         
         NavigationView {
@@ -59,7 +62,7 @@ struct AuthenticationView: View {
                     TextField("Email", text: $email)
                         .frame(height: 54)
                         .textFieldStyle(.plain)
-                        .textContentType(.username)
+                        .textContentType(.emailAddress)
                         .padding(.horizontal, 10)
                         .cornerRadius(8)
                         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.5))
@@ -79,13 +82,22 @@ struct AuthenticationView: View {
                     
                     Button {
                         
-                        if isRegisterPresented {
-                            // Register
-                        } else {
-                            // Sign In
-                        }
+                        guard isInputValid() else { return }
                         
-                        presentationMode.wrappedValue.dismiss()
+                        Task {
+                            do {
+                                
+                                if isRegisterPresented {
+                                    let _ = try await UserManager.shared.register(firstName: firstName, lastName: lastName, email: email, password: password)
+                                } else {
+                                    let _ = try await UserManager.shared.signIn(email: email, password: password)
+                                }
+                                presentationMode.wrappedValue.dismiss()
+                                
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
                         
                     } label: {
                         let actionButtonTitle = isRegisterPresented ? "Register" : "Sign In"
@@ -132,10 +144,36 @@ struct AuthenticationView: View {
 
                 }
             }
+            .alert(isPresented: $isAlertPresented) {
+                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
             
         }
         
     }
+    
+    private func isInputValid() -> Bool {
+        if isRegisterPresented && firstName.isEmpty {
+            alertMessage = "Please enter your first name."
+            isAlertPresented = true
+            return false
+        } else if isRegisterPresented && lastName.isEmpty {
+            alertMessage = "Please enter your last name."
+            isAlertPresented = true
+            return false
+        } else if email.isEmpty {
+            alertMessage = "Please enter your email."
+            isAlertPresented = true
+            return false
+        } else if password.isEmpty {
+            alertMessage = "Please enter a password."
+            isAlertPresented = true
+            return false
+        }
+        
+        return true
+    }
+    
 }
 
 struct AuthenticationView_Previews: PreviewProvider {
