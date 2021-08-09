@@ -28,14 +28,14 @@ struct ContentView: View {
                     .font(.system(size: 24.0, weight: .medium))
                     .foregroundColor(Theme.Color.text)
                     .multilineTextAlignment(.center)
-                    .padding()
+                    .padding(.top, 20)
                 
                 if userManager.isSignedIn {
                     Text("You are signed in!")
                         .font(.system(size: 20.0, weight: .regular))
                         .foregroundColor(Theme.Color.text)
                         .multilineTextAlignment(.center)
-                        .padding()
+                        .padding(.top, 20)
                 }
                 
                 Button {
@@ -56,7 +56,8 @@ struct ContentView: View {
                         .background(Theme.Color.buttonBackground)
                         .cornerRadius(Theme.cornerRadius)
                         .font(.system(size: 18.0, weight: .semibold))
-                        .padding(.horizontal, 20.0)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 20)
                 }
                 .fullScreenCover(isPresented: $isAuthenticationViewPresented, onDismiss: nil, content: AuthenticationView.init)
                 
